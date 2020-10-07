@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html ng-app="app">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Angular-Rest-Boostrap</title>
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css'%}">
+
+</head>
+<body>
+
+
+    <a ui-sref="test1" >State1</a>
+    <a ui-sref="categoria">categoria</a>
+
+    <div ng-controller="categoriaCtrl">
+            <div class="row">
+                    <div class="col-md-2">
+                        <form name = "formuVal" class = "">
+                                <!--Campo name-->
+                                <div class = "form-group  has-feedback" ng-class = "{'has-success': !formuVal.name.$pristine && !formuVal.name.$error.required, 'has-error':!formuVal.name.$pristine && formuVal.name.$error.required}">
+                                    <label for = "name" class = "control-label">Nombre</label>
+                                    <div  class = "input-group">
+                                        <span class = "input-group-addon glyphicon glyphicon-pencil"></span>
+                                        <input type = "text" name = "name" class = "form-control" placeholder = "Nombre" ng-model = "categoria.nombre" required >
+                                    </div>
+                                    <span ng-show = "!formuVal.name.$pristine" class="glyphicon form-control-feedback" ng-class = "{'glyphicon-thumbs-up':!formuVal.name.$pristine && !formuVal.name.$error.required, 'glyphicon-thumbs-down':!formuVal.name.$pristine && formuVal.name.$error.required}"></span>
+
+
+                                    <!--mensaje de error-->
+                                    <span ng-show = "!formuVal.name.$pristine && formuVal.name.$error.required" class="control-label">El nombre es requerido</span>
+
+                                </div>
+                                <!--Campo name-->
+
+
+                                <!--Campo last name-->
+                                <div class = "form-group has-feedback" ng-class = "{'has-success': !formuVal.lastName.$pristine && !formuVal.lastName.$error.required, 'has-error':!formuVal.lastName.$pristine && formuVal.lastName.$error.required}">
+                                    <label for = "lastName" class = "control-label">Codigo</label>
+                                    <div class = "input-group">
+                                        <span class = "input-group-addon glyphicon glyphicon-pencil"></span>
+                                        <input type = "text" name = "lastName" class = "form-control" placeholder = "Codigo" ng-model = "categoria.codigo" required  >
+                                    </div>
+
+                                    <span ng-show = "!formuVal.lastName.$pristine " class="glyphicon form-control-feedback" ng-class = "{'glyphicon-thumbs-up':!formuVal.lastName.$pristine && !formuVal.lastName.$error.required,'glyphicon-thumbs-down':!formuVal.lastName.$pristine && formuVal.lastName.$error.required}"></span>
+                                    <!--mensaje de error-->
+                                    <span ng-show = "!formuVal.lastName.$pristine && formuVal.lastName.$error.required" class= "control-label">El apellido es requerido</span>
+
+                                </div>
+                                <!--Campo last name-->
+
+
+                                <!--Campo email-->
+                              <!--  <div class = "form-group has-feedback" ng-class = "{'has-success': !formuVal.email.$pristine && !formuVal.email.$error.email,'has-error': !formuVal.email.$pristine && (formuVal.email.$error.required || formuVal.email.$error.email)}">
+                                    <label for = "email" class= "control-label">E-mail</label>
+                                    <div class= "input-group">
+                                        <span class = "input-group-addon glyphicon glyphicon-envelope"></span>
+                                        <input type = "email" name = "email" class = "form-control " placeholder = "email" ng-model = "formData.email" required>
+                                    </div>
+                                    <span ng-show = "!formuVal.email.$pristine " class="glyphicon form-control-feedback" ng-class= "{'glyphicon-thumbs-up':!formuVal.email.$pristine && !formuVal.email.$error.email, 'glyphicon-thumbs-down':!formuVal.email.$pristine && (formuVal.email.$error.required || formuVal.email.$error.email)}"></span>
+                                    <!--mensaje de error-->
+                                   <!-- <span ng-show = "!formuVal.email.$pristine && formuVal.email.$error.required" class= "control-label">El E-Mail es requerido</span>
+                                    <span ng-show = "!formuVal.email.$pristine && formuVal.email.$error.email" class= "control-label">Entre un E-mail valido</span>
+
+                                </div>-->
+                                <!--Campo email-->
+                                <input type = "submit" class = "btn btn-success pull-left valido" ng-click = "save()" ng-disabled = "!formuVal.$valid" value = "Save">
+                                <!--<a href=""  ng-click = "save()" ng-disabled = "!formuVal.$valid"> save</a>-->
+                            </form>
+                    </div>
+                </div>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-3">
+                 <input type = "buscar" name = "buscar" class = "form-control " placeholder = "Buscar..." ng-model = "formData.buscar"  >
+            </div>
+        </div>
+            <div class="table-responsive">
+
+                    <table class="table">
+                        <tr>
+                            <td><strong>ID</strong></td>
+                            <td><strong>Codigo</strong></td>
+                            <td><strong>Nombre</strong></td>
+                            <td><strong>Edit</strong></td>
+                            <td><strong>Delete</strong></td>
+
+                        </tr>
+
+
+
+
+                                <tr  ng-repeat="obj in lista|filter:formData.buscar" class="active" >
+                                    <td>{$ obj.id $}</td>
+                                    <td>{$ obj.codigo $}</td>
+                                    <td>{$ obj.nombre $}</td>
+                                    <td><a href="" ng-click="sel(obj)"><span class="glyphicon glyphicon-pencil "></span></a> </td>
+                                    <td><a href="" ng-click="delete(obj)"> <span class="glyphicon glyphicon-trash "></span> </a></td>
+
+                                </tr>
+
+
+                    </table>
+                <button type='button' ng-disabled='currentPage == 0' ng-click='currentPage = currentPage - 1'>&laquo;</button>
+
+                <!-- Navegar a una página especifica-->
+                <button type='button' ng-disabled='currentPage == page.no - 1' ng-click='setPage(page.no)' ng-repeat='page in pages'>{{page.no}}</button>
+
+                <!-- Navegar hacia adelante -->
+                 <button type='button' ng-disabled='currentPage >= data.length/pageSize - 1' ng-click='currentPage = currentPage + 1'>&raquo;</button>
+
+            </div>
+        </div>
+</div>
+    </div>
+
+<div class="pagination">
+    <span class="steplinks">
+        {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">anterior</a>
+        {% endif %}
+        <span class="current">
+        Pagina {{ page_obj.number }} de {{ paginator.num_pages }}.
+        </span>
+        {% if page_obj.has_next %}
+             <a href="?page={{ page_obj.next_page_number }}">siguiente</a>
+        {% endif %}
+    </span>
+</div>
+
+
+
+    <script src="{% static 'js/angular.min.js' %}"></script>
+    <script src="{% static 'js/angular-ui-router.js' %}"></script>
+    <script src="{% static 'js/angular-ui-router.min.js' %}"></script>
+
+
+
+
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/categoriaCtrl.js' %}"></script>
+    <script src="{% static 'js/router.js' %}"></script>
+    <script src="{% static 'js/angular-resource.min.js' %}"></script>
+
+
+
+
+    <script src="{% static 'js/api.js' %}"></script>
+
+
+
+
+
+
+</body>
+</html>

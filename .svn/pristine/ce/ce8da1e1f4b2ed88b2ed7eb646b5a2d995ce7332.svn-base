@@ -1,0 +1,27 @@
+from rest_framework import serializers,viewsets
+from ..models import Categoria, Libro
+
+
+class CategoriaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Categoria
+
+class CategoriaViewSet(viewsets.ModelViewSet):
+    queryset = Categoria.objects.all()
+    serializer_class = CategoriaSerializer
+
+##########################################################################
+
+class LibroSerializer(serializers.ModelSerializer):
+    categoria = CategoriaSerializer()
+    class Meta:
+        model = Libro
+
+
+class LibroViewSet(viewsets.ModelViewSet):
+    serializer_class = LibroSerializer
+    queryset = Libro.objects.all()
+
+
+

@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html ng-app="app" >
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Yo soy base</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/ui-grid.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/table.css' %}">
+
+</head>
+<body>
+          <a ui-sref="index">Index</a>
+          <a ui-sref="index.main" >Main</a>
+          <a ui-sref="index.categorias">Categorias</a>
+
+
+
+      <!--Bloque de contenido del titulo-->
+      <h1>{% block title %}{% endblock %}</h1>
+
+      <!--Bloque de Contenido de la Pagina-->
+         <div ui-view="main"></div>
+         <div ui-view="tabledata"></div>
+         <div ui-view="graph"></div>
+
+
+
+</body>
+
+    <!-- Aqui estan todos los scrpit js de la app-->
+    <script src="{% static 'js/angular.min.js' %}"></script>
+    <script src="{% static 'js/angular-ui-router.js' %}"></script>
+    <script src="{% static 'js/angular-ui-router.min.js' %}"></script>
+
+
+    <script src="{% static 'js/angular-resource.min.js' %}"></script>
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/categoriaCtrl.js' %}"></script>
+    <script src="{% static 'js/router.js' %}"></script>
+
+
+    <script src="{% static 'js/angular-material.min.js' %}"></script>
+    <script src="{% static 'js/angular-aria.min.js' %}"></script>
+    <script src="{% static 'js/angular-messages.min.js' %}"></script>
+    <script src="{% static 'js/angular-animate.min.js' %}"></script>
+
+
+    <script src="{% static 'js/api.js' %}"></script>
+
+</html>

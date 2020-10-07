@@ -1,0 +1,14 @@
+<div ng-controller="categoriaCtrl">
+
+    <input type="text" ng-model="nombre">
+    {{ nombre }}
+    <a href="" ng-click="save()">Save</a>
+
+    <table>
+        <tr ng-repeat="d in lista">
+            <td>{{ d.nombre }}</td>
+            <td>{{ d.codigo }}</td>
+        </tr>
+    </table>
+
+</div>

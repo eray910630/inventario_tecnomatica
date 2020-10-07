@@ -1,0 +1,19 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('appCrud', '0002_libro'),
+    ]
+
+    operations = [
+        migrations.RenameField(
+            model_name='libro',
+            old_name='Categoria',
+            new_name='categoria',
+        ),
+    ]
